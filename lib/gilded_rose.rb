@@ -12,7 +12,7 @@ class GildedRose
         end
       else
         if item.quality < 50 #TODO  Brie and Backstage
-          item.quality = item.quality + 1 #TODO Quality of cheese
+          increase_quality_of_specials(item) #TODO Quality of cheese
           if item.name == "Backstage passes to a TAFKAL80ETC concert" #TODO Backstage passes only
             if item.sell_in < 11
               if item.quality < 50
@@ -60,9 +60,13 @@ class GildedRose
   def regular_item?(item)
     !["Aged Brie", "Backstage passes to a TAFKAL80ETC concert"].include?(item.name)
   end
-  
+
   def at_minimum_quality?(item)
     !(item.quality > 0)
+  end
+
+  def increase_quality_of_specials(item)
+    item.quality = item.quality + 1
   end
 
   # def legacy_update_quality()
