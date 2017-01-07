@@ -1,5 +1,7 @@
 class GildedRose
 
+  SPECIAL_ITEMS = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros"]
+
   def initialize(items)
     @items = items
   end
@@ -7,12 +9,10 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if regular_item?(item)
-        if item.name != "Sulfuras, Hand of Ragnaros" #TODO Filter, Special items
-          modify_quality(item)
-        end
+        modify_quality(item)
       else
-        if item.quality < 50 #TODO  Brie and Backstage
-          increase_quality_of_specials(item) #TODO Quality of cheese
+        if below_max?(item)
+          increase_quality_of_specials(item)
           if item.name == "Backstage passes to a TAFKAL80ETC concert" #TODO Backstage passes only
             if item.sell_in < 11
               if item.quality < 50
@@ -58,7 +58,7 @@ class GildedRose
   end
 
   def regular_item?(item)
-    !["Aged Brie", "Backstage passes to a TAFKAL80ETC concert"].include?(item.name)
+    !SPECIAL_ITEMS.include?(item.name)
   end
 
   def at_minimum_quality?(item)
@@ -69,6 +69,9 @@ class GildedRose
     item.quality = item.quality + 1
   end
 
+  def below_max?(item)
+    item.quality < 50
+  end
   # def legacy_update_quality()
   #   @items.each do |item|
   #     if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" #TODO update quality
