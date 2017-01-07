@@ -7,11 +7,11 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if regular_item?(item)
-        # if positive_quality?(item) #item.quality > 0 #TODO Guard, cannot decrese below 0
+        if positive_quality?(item) #item.quality > 0 #TODO Guard, cannot decrese below 0
           if item.name != "Sulfuras, Hand of Ragnaros" #TODO Filter, Special items
             modify_quality(item)
           end
-        # end
+        end
       else
         if item.quality < 50 #TODO  Brie and Backstage
           item.quality = item.quality + 1 #TODO Quality of cheese
