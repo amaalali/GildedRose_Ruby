@@ -27,7 +27,7 @@ describe GildedRose do
     end
 
     it "does not change the name" do
-      items_name = items.map { |item| item.name }
+      #items_name = items.map { |item| item.name } #TODO WRONG
       updated_items_name = updated_items.map { |item| item.name }
       expect(items_name).to eq(updated_items_name)
     end
