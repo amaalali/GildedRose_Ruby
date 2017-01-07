@@ -7,10 +7,8 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if regular_item?(item)
-        if positive_quality?(item) #item.quality > 0 #TODO Guard, cannot decrese below 0
-          if item.name != "Sulfuras, Hand of Ragnaros" #TODO Filter, Special items
-            modify_quality(item)
-          end
+        if item.name != "Sulfuras, Hand of Ragnaros" #TODO Filter, Special items
+          modify_quality(item)
         end
       else
         if item.quality < 50 #TODO  Brie and Backstage
@@ -62,11 +60,7 @@ class GildedRose
   def regular_item?(item)
     !["Aged Brie", "Backstage passes to a TAFKAL80ETC concert"].include?(item.name)
   end
-
-  def positive_quality?(item)
-    item.quality > 0 #TODO Guard, cannot decrese below 0
-  end
-
+  
   def at_minimum_quality?(item)
     !(item.quality > 0)
   end
